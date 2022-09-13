@@ -18,7 +18,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#46758c";
+static const char col_cyan[]        = "#627d92";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -119,6 +119,9 @@ static Key keys[] = {
 	{ 0,                            XK_Print,                spawn, {.v = printdesktop } },
 	{ MODKEY,                       XK_Print,                spawn, {.v = printarea } },
 	{ MODKEY|SuperMask,             XK_Print,                spawn, {.v = printscreen } },
+	{ 0,                            XF86XK_AudioPlay,        spawn, {.v = printdesktop } },
+	{ MODKEY,                       XF86XK_AudioPlay,        spawn, {.v = printarea } },
+	{ MODKEY|SuperMask,             XF86XK_AudioPlay,        spawn, {.v = printscreen } },
 };
 
 /* button definitions */
