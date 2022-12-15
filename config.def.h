@@ -69,9 +69,13 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "konsole", NULL };
 
 // audio buttons
-static const char *upvol[]   = { "pactl", "set-sink-volume", "0", "+3%",     NULL };
-static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-3%",     NULL };
-static const char *mutevol[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+static const char *upvol[]   = { "bash", "/home/illusion/scripts/vol_up.sh", NULL };
+static const char *downvol[] = { "bash", "/home/illusion/scripts/vol_down.sh",  NULL };
+static const char *mutevol[] = { "bash", "/home/illusion/scripts/vol_mute.sh", NULL };
+
+// brightness buttons
+static const char *brightnessup[] = { "brightnessctl", "s", "5%+" };
+static const char *brightnessdown[] = { "brightnessctl", "s", "5%-" };
 
 // screenshot buttons
 static const char *printdesktop[] = { "flameshot", "full", "-c", NULL };
@@ -116,6 +120,8 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 	{ 0,                            XF86XK_AudioMute,        spawn, {.v = mutevol } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
+	{ 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = brightnessup } },
+	{ 0,                            XF86XK_MonBrightnessDown,spawn, {.v = brightnessdown } },
 	{ 0,                            XK_Print,                spawn, {.v = printdesktop } },
 	{ MODKEY,                       XK_Print,                spawn, {.v = printarea } },
 	{ MODKEY|SuperMask,             XK_Print,                spawn, {.v = printscreen } },
