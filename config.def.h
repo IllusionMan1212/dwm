@@ -12,8 +12,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Monofur Nerd Font:size=13:antialias=true" };
-static const char dmenufont[]       = "Monofur Nerd Font:size=12";
+static const char *fonts[]          = { "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -26,7 +26,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -70,8 +70,14 @@ static const char *termcmd[]  = { "konsole", NULL };
 
 // audio buttons
 static const char *upvol[]   = { "bash", "/home/illusion/scripts/vol_up.sh", NULL };
-static const char *downvol[] = { "bash", "/home/illusion/scripts/vol_down.sh",  NULL };
+static const char *downvol[] = { "bash", "/home/illusion/scripts/vol_down.sh", NULL };
 static const char *mutevol[] = { "bash", "/home/illusion/scripts/vol_mute.sh", NULL };
+static const char *micmute[] = { "bash", "/home/illusion/scripts/mic_mute.sh", NULL };
+static const char *nextsong[] = { "bash", "/home/illusion/scripts/next_song.sh", NULL };
+static const char *prevsong[] = { "bash", "/home/illusion/scripts/prev_song.sh", NULL };
+static const char *incpos[] = { "bash", "/home/illusion/scripts/inc_position.sh", NULL };
+static const char *decpos[] = { "bash", "/home/illusion/scripts/dec_position.sh", NULL };
+static const char *pauseplay[] = { "bash", "/home/illusion/scripts/pause_play.sh", NULL };
 
 // brightness buttons
 static const char *brightnessup[] = { "brightnessctl", "s", "5%+" };
@@ -81,6 +87,8 @@ static const char *brightnessdown[] = { "brightnessctl", "s", "5%-" };
 static const char *printdesktop[] = { "flameshot", "full", "-c", NULL };
 static const char *printscreen[] = { "flameshot", "screen", "-c", NULL };
 static const char *printarea[] = { "flameshot", "gui", NULL };
+
+static const char *launch_predator[] = { "predator-ng", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -101,6 +109,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_t,	   togglealwaysontop, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -120,14 +129,20 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 	{ 0,                            XF86XK_AudioMute,        spawn, {.v = mutevol } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
+	{ 0,							XF86XK_AudioMicMute,	 spawn, {.v = micmute } },
+	{ 0,							XF86XK_AudioNext,		 spawn, {.v = nextsong } },
+	{ 0,							XF86XK_AudioPrev,		 spawn, {.v = prevsong } },
+	{ ControlMask,					XF86XK_AudioNext,		 spawn, {.v = incpos } },
+	{ ControlMask,					XF86XK_AudioPrev,		 spawn, {.v = decpos } },
+	{ 0,							XF86XK_AudioPause,		 spawn, {.v = pauseplay } },
+	{ 0,							XF86XK_AudioPlay,		 spawn, {.v = pauseplay } },
 	{ 0,                            XF86XK_MonBrightnessUp,  spawn, {.v = brightnessup } },
 	{ 0,                            XF86XK_MonBrightnessDown,spawn, {.v = brightnessdown } },
 	{ 0,                            XK_Print,                spawn, {.v = printdesktop } },
 	{ MODKEY,                       XK_Print,                spawn, {.v = printarea } },
 	{ MODKEY|SuperMask,             XK_Print,                spawn, {.v = printscreen } },
-	{ 0,                            XF86XK_AudioPlay,        spawn, {.v = printdesktop } },
-	{ MODKEY,                       XF86XK_AudioPlay,        spawn, {.v = printarea } },
-	{ MODKEY|SuperMask,             XF86XK_AudioPlay,        spawn, {.v = printscreen } },
+	{ MODKEY,						XF86XK_AudioPlay,        spawn, {.v = printarea } },
+	{ 0,							XF86XK_Launch3,			 spawn, {.v = launch_predator } },
 };
 
 /* button definitions */
